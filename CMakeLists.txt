@@ -17,6 +17,7 @@ set(PROJECT_SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+        budgetmanager.cpp
 )
 
 # One target definition ONLY
@@ -25,6 +26,7 @@ qt_add_executable(QTinQT
     ${PROJECT_SOURCES}
     resources.qrc
     budgetmanager.h budgetmanager.cpp
+        budgetmanager.cpp
 )
 
 # Link once
