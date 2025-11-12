@@ -1,6 +1,6 @@
 #include "budgetmanager.h"
 
-using namespace std, BudgetManager;
+using namespace std;
 
 
 BudgetManager::BudgetManager() {
@@ -12,7 +12,7 @@ BudgetManager::BudgetManager() {
 }
 
 //add what the function will take in for its arguments and what it will do with it! Hope this helps.. Jordan - 12:32 PM
-void addExpense()
+void BudgetManager::addExpense()
 {}
 
 //add the rest of the functions. 12:34PM

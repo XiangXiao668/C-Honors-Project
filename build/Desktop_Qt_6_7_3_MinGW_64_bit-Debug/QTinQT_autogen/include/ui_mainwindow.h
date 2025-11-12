@@ -34,22 +34,22 @@ public:
     QWidget *centralwidget;
     QTabWidget *tabWidget;
     QWidget *moneytab;
-    QTableWidget *tableWidget_2;
-    QPushButton *pushButton_4;
+    QTableWidget *wagesTable;
+    QPushButton *deleteWageButton;
     QFrame *wagesFrame;
-    QPushButton *pushButton_3;
+    QPushButton *wagesAddButton;
     QLabel *label;
     QLabel *label_8;
-    QLineEdit *txtFirstNum_3;
-    QLineEdit *lineEdit_5;
+    QLineEdit *wagesLine1;
+    QLineEdit *wagesLine2;
     QLabel *label_9;
     QDateEdit *dateEdit_2;
-    QDateEdit *dateEdit_3;
+    QDateEdit *dateWages;
     QWidget *expenseTab;
-    QPushButton *pushButton_2;
+    QPushButton *deleteExpenseButton;
     QTableWidget *tableWidget;
     QFrame *wagesFrame_2;
-    QPushButton *pushButton;
+    QPushButton *expensesAddButton_clicked;
     QLineEdit *lineEdit_4;
     QLabel *label_5;
     QLabel *label_4;
@@ -108,27 +108,27 @@ public:
 "}"));
         moneytab = new QWidget();
         moneytab->setObjectName("moneytab");
-        tableWidget_2 = new QTableWidget(moneytab);
-        if (tableWidget_2->columnCount() < 3)
-            tableWidget_2->setColumnCount(3);
+        wagesTable = new QTableWidget(moneytab);
+        if (wagesTable->columnCount() < 3)
+            wagesTable->setColumnCount(3);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        wagesTable->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        wagesTable->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        tableWidget_2->setObjectName("tableWidget_2");
-        tableWidget_2->setGeometry(QRect(270, 50, 301, 191));
-        tableWidget_2->setAlternatingRowColors(true);
-        tableWidget_2->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
-        tableWidget_2->setGridStyle(Qt::PenStyle::SolidLine);
-        pushButton_4 = new QPushButton(moneytab);
-        pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(270, 260, 131, 41));
+        wagesTable->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        wagesTable->setObjectName("wagesTable");
+        wagesTable->setGeometry(QRect(270, 50, 301, 191));
+        wagesTable->setAlternatingRowColors(true);
+        wagesTable->setSelectionBehavior(QAbstractItemView::SelectionBehavior::SelectRows);
+        wagesTable->setGridStyle(Qt::PenStyle::SolidLine);
+        deleteWageButton = new QPushButton(moneytab);
+        deleteWageButton->setObjectName("deleteWageButton");
+        deleteWageButton->setGeometry(QRect(270, 260, 131, 41));
         QFont font;
         font.setBold(true);
-        pushButton_4->setFont(font);
-        pushButton_4->setMouseTracking(false);
+        deleteWageButton->setFont(font);
+        deleteWageButton->setMouseTracking(false);
         wagesFrame = new QFrame(moneytab);
         wagesFrame->setObjectName("wagesFrame");
         wagesFrame->setGeometry(QRect(10, 30, 591, 291));
@@ -137,11 +137,11 @@ public:
 "border: 1px solid #D0D3D8;"));
         wagesFrame->setFrameShape(QFrame::Shape::StyledPanel);
         wagesFrame->setFrameShadow(QFrame::Shadow::Raised);
-        pushButton_3 = new QPushButton(wagesFrame);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(30, 190, 71, 31));
-        pushButton_3->setFont(font);
-        pushButton_3->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        wagesAddButton = new QPushButton(wagesFrame);
+        wagesAddButton->setObjectName("wagesAddButton");
+        wagesAddButton->setGeometry(QRect(30, 190, 71, 31));
+        wagesAddButton->setFont(font);
+        wagesAddButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #FFFFFF;\n"
 "    border: 1px solid #D0D3D8;\n"
 "    border-radius: 6px;\n"
@@ -173,21 +173,21 @@ public:
         label_8 = new QLabel(wagesFrame);
         label_8->setObjectName("label_8");
         label_8->setGeometry(QRect(30, 110, 71, 31));
-        txtFirstNum_3 = new QLineEdit(wagesFrame);
-        txtFirstNum_3->setObjectName("txtFirstNum_3");
-        txtFirstNum_3->setGeometry(QRect(100, 70, 151, 31));
-        txtFirstNum_3->setStyleSheet(QString::fromUtf8("background-color: #ECEEF1;\n"
+        wagesLine1 = new QLineEdit(wagesFrame);
+        wagesLine1->setObjectName("wagesLine1");
+        wagesLine1->setGeometry(QRect(100, 70, 151, 31));
+        wagesLine1->setStyleSheet(QString::fromUtf8("background-color: #ECEEF1;\n"
 "color: #1E1E1E;"));
-        txtFirstNum_3->setFrame(true);
-        txtFirstNum_3->setEchoMode(QLineEdit::EchoMode::Normal);
-        txtFirstNum_3->setClearButtonEnabled(false);
-        lineEdit_5 = new QLineEdit(wagesFrame);
-        lineEdit_5->setObjectName("lineEdit_5");
-        lineEdit_5->setEnabled(true);
-        lineEdit_5->setGeometry(QRect(100, 110, 151, 31));
-        lineEdit_5->setStyleSheet(QString::fromUtf8("background-color: #ECEEF1;\n"
+        wagesLine1->setFrame(true);
+        wagesLine1->setEchoMode(QLineEdit::EchoMode::Normal);
+        wagesLine1->setClearButtonEnabled(false);
+        wagesLine2 = new QLineEdit(wagesFrame);
+        wagesLine2->setObjectName("wagesLine2");
+        wagesLine2->setEnabled(true);
+        wagesLine2->setGeometry(QRect(100, 110, 151, 31));
+        wagesLine2->setStyleSheet(QString::fromUtf8("background-color: #ECEEF1;\n"
 "color: #1E1E1E;"));
-        lineEdit_5->setReadOnly(false);
+        wagesLine2->setReadOnly(false);
         label_9 = new QLabel(wagesFrame);
         label_9->setObjectName("label_9");
         label_9->setGeometry(QRect(30, 70, 71, 31));
@@ -197,32 +197,32 @@ public:
         dateEdit_2->setStyleSheet(QString::fromUtf8("background-color: #FFFFFF;\n"
 "color: #1E1E1E;"));
         dateEdit_2->setCalendarPopup(true);
-        dateEdit_3 = new QDateEdit(wagesFrame);
-        dateEdit_3->setObjectName("dateEdit_3");
-        dateEdit_3->setGeometry(QRect(30, 150, 221, 31));
-        dateEdit_3->setStyleSheet(QString::fromUtf8("background-color: #FFFFFF;\n"
+        dateWages = new QDateEdit(wagesFrame);
+        dateWages->setObjectName("dateWages");
+        dateWages->setGeometry(QRect(30, 150, 221, 31));
+        dateWages->setStyleSheet(QString::fromUtf8("background-color: #FFFFFF;\n"
 "color: #1E1E1E;"));
-        dateEdit_3->setDateTime(QDateTime(QDate(2025, 1, 1), QTime(0, 0, 0)));
-        dateEdit_3->setMaximumDateTime(QDateTime(QDate(9999, 11, 30), QTime(23, 59, 59)));
-        dateEdit_3->setCalendarPopup(true);
+        dateWages->setDateTime(QDateTime(QDate(2025, 1, 1), QTime(0, 0, 0)));
+        dateWages->setMaximumDateTime(QDateTime(QDate(9999, 12, 1), QTime(23, 59, 59)));
+        dateWages->setCalendarPopup(true);
         label->raise();
         label_8->raise();
-        txtFirstNum_3->raise();
-        lineEdit_5->raise();
+        wagesLine1->raise();
+        wagesLine2->raise();
         label_9->raise();
-        pushButton_3->raise();
+        wagesAddButton->raise();
         dateEdit_2->raise();
-        dateEdit_3->raise();
+        dateWages->raise();
         tabWidget->addTab(moneytab, QString());
         wagesFrame->raise();
-        tableWidget_2->raise();
-        pushButton_4->raise();
+        wagesTable->raise();
+        deleteWageButton->raise();
         expenseTab = new QWidget();
         expenseTab->setObjectName("expenseTab");
-        pushButton_2 = new QPushButton(expenseTab);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(270, 360, 121, 41));
-        pushButton_2->setFont(font);
+        deleteExpenseButton = new QPushButton(expenseTab);
+        deleteExpenseButton->setObjectName("deleteExpenseButton");
+        deleteExpenseButton->setGeometry(QRect(270, 360, 121, 41));
+        deleteExpenseButton->setFont(font);
         tableWidget = new QTableWidget(expenseTab);
         if (tableWidget->columnCount() < 3)
             tableWidget->setColumnCount(3);
@@ -244,11 +244,11 @@ public:
 "border: 1px solid #D0D3D8;"));
         wagesFrame_2->setFrameShape(QFrame::Shape::StyledPanel);
         wagesFrame_2->setFrameShadow(QFrame::Shadow::Raised);
-        pushButton = new QPushButton(wagesFrame_2);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(140, 230, 101, 31));
-        pushButton->setFont(font);
-        pushButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+        expensesAddButton_clicked = new QPushButton(wagesFrame_2);
+        expensesAddButton_clicked->setObjectName("expensesAddButton_clicked");
+        expensesAddButton_clicked->setGeometry(QRect(140, 230, 101, 31));
+        expensesAddButton_clicked->setFont(font);
+        expensesAddButton_clicked->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: #FFFFFF;\n"
 "    border: 1px solid #D0D3D8;\n"
 "    border-radius: 6px;\n"
@@ -312,7 +312,7 @@ public:
         dateEdit->setCalendarPopup(true);
         tabWidget->addTab(expenseTab, QString());
         wagesFrame_2->raise();
-        pushButton_2->raise();
+        deleteExpenseButton->raise();
         tableWidget->raise();
         budgetTab = new QWidget();
         budgetTab->setObjectName("budgetTab");
@@ -357,7 +357,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget->setCurrentIndex(0);
-        pushButton_4->setDefault(false);
+        deleteWageButton->setDefault(false);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -366,27 +366,27 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
+        QTableWidgetItem *___qtablewidgetitem = wagesTable->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "Date", nullptr));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_2->horizontalHeaderItem(1);
+        QTableWidgetItem *___qtablewidgetitem1 = wagesTable->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(2);
+        QTableWidgetItem *___qtablewidgetitem2 = wagesTable->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "Amount", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("MainWindow", "Delete Selected", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "ADD", nullptr));
+        deleteWageButton->setText(QCoreApplication::translate("MainWindow", "Delete Selected", nullptr));
+        wagesAddButton->setText(QCoreApplication::translate("MainWindow", "ADD", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "  Monthly Pay:", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", " Amount:", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "  Name:", nullptr));
-        dateEdit_3->setDisplayFormat(QCoreApplication::translate("MainWindow", "MM/dd/yyyy", nullptr));
+        dateWages->setDisplayFormat(QCoreApplication::translate("MainWindow", "MM/dd/yyyy", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(moneytab), QCoreApplication::translate("MainWindow", "Wages", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Delete Selected", nullptr));
+        deleteExpenseButton->setText(QCoreApplication::translate("MainWindow", "Delete Selected", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "Date", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(1);
         ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "Time", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(2);
         ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "Amount", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "ADD", nullptr));
+        expensesAddButton_clicked->setText(QCoreApplication::translate("MainWindow", "ADD", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", " Amount:", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "  Name:", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "  Monthly Expenses:", nullptr));

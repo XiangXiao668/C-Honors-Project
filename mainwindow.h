@@ -17,6 +17,8 @@ public:
 
 private slots:
     void onTabChanged(int index);   // called when the current tab changes
+    void on_wagesAddButton_clicked();
+    void on_deleteWageButton_clicked();
 
 private:
     Ui::MainWindow *ui;

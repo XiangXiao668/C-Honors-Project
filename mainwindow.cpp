@@ -16,14 +16,17 @@
 // allows for table header resize
 #include <QHeaderView>
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
 
-
+    //makes this ui the mainwindow.ui
     ui->setupUi(this);
 
+    //sets the ui's tab page to the first page of the tab
     ui->tabWidget->setCurrentIndex(0);
 
     //this connection connects the tab index to onTabChanged to create a tab animation.
@@ -35,16 +38,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     resize(625, 500);  //sets initial window size
 
-    //Set window title (top bar text)
+    //Set window title
     setWindowTitle("Honor's Budget App");
 
-    // Use whatever size the .ui gives and lock it
-    //setFixedSize(size());
-
-    // also remove the maximize button:
+    //Remove the maximize button:
     setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
 
-    // Create the data for the pie chart
+    // Create the data for the pie chart !!will need to add changeing veriables here!!
     auto *series = new QPieSeries(this);
     series->append("Rent",       1200);
     series->append("Groceries",   400);
@@ -53,9 +53,9 @@ MainWindow::MainWindow(QWidget *parent)
     series->append("Savings",     300);
 
     // Optional: explode one slice / show labels
-    QPieSlice *highlight = series->slices().at(0);
-    highlight->setExploded(true);
-    highlight->setLabelVisible(true);
+    //QPieSlice *highlight = series->slices().at(0);
+   // highlight->setExploded(true);
+    //highlight->setLabelVisible(true);
 
     // Create the chart
     auto *chart = new QChart();
@@ -68,6 +68,37 @@ MainWindow::MainWindow(QWidget *parent)
     ui->chartView->setRenderHint(QPainter::Antialiasing);
 
 
+}
+
+//wages button code
+void MainWindow::on_wagesAddButton_clicked()
+{
+    qDebug() << "BUTTON CLICKED";
+    QString text1 = ui->wagesLine1->text();
+    QString text2 = ui->wagesLine2->text();
+    //QDate calendarDate = ui->dateWages->selectedDate();
+    QDate dateEditDate = ui->dateWages->date();
+
+    int row = ui->wagesTable->rowCount();
+    ui->wagesTable->insertRow(row);
+
+    ui->wagesTable->setItem(row, 0, new QTableWidgetItem(text1));
+    ui->wagesTable->setItem(row, 1, new QTableWidgetItem(text2));
+    //ui->tableWidget->setItem(row, 2, new QTableWidgetItem(calendarDate.toString("yyyy-MM-dd")));
+    ui->wagesTable->setItem(row, 2, new QTableWidgetItem(dateEditDate.toString("yyyy-MM-dd")));
+}
+
+void MainWindow::on_deleteWageButton_clicked()
+{
+    // Which row is currently selected?
+    int row = ui->wagesTable->currentRow();
+
+    // If nothing is selected, do nothing
+    if (row < 0)
+        return;
+
+    // Remove that row
+    ui->wagesTable->removeRow(row);
 }
 
 //Changes tab 3 size and animation for the Tables and Pie Chart
