@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
    // highlight->setExploded(true);
     //highlight->setLabelVisible(true);
 
-    // Create the chart
+    // Create the pie chart
     auto *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("Monthly Budget Breakdown");
