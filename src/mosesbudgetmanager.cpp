@@ -81,16 +81,19 @@ int main() {
         //Now that we've checked for the bounds of our array and grown them should they need, we can now move onto
         //adding the quantity of expenses by doing arithmetic on the expenseCount variable.
         cout << "\n--- Adding Expense " << expenseCount + 1 << " ---\n";
-        getExpenseDetails(expenses[expenseCount]);
+
+        //maybe use for descriptions and whatnot?
+        //getExpenseDetails(expenses[expenseCount]);
+
         expenseCount++;
 
-        //
+        //at this point the user has input atleast 1 expense and so the door is open to leave.
         cout << "Done entering expenses for now? (y/n): ";
         cin >> doneResponse;
 
         //check for case sensitivity in y or Y lol...
         if (doneResponse == "y" || doneResponse == "Y") {
-            isDone = true; //Sets the sentinel to true whether y or Y so the user doesn't feel wronged
+            isDone = true; //Sets to true whether y or Y so the user doesn't feel wronged
         }
 
         //Clear the buffer after the y or n prompt
@@ -98,14 +101,15 @@ int main() {
     }
     //end of while loop for isDone
 
-    //At this point, we want to show the user what they've input(their expenses, quantity of expenses, and budget)
-    printBudgetReport(expenses, expenseCount, initialBudget);
+    //now we are out of the input loop. At this point, we want to show the user what they've input(their expenses,
+    //quantity of expenses, and budget)
+    printBudgetReport(expenses, expenseCount, initialBudget); //remember those prototypes we declared before main()?
 
-    //Dynamic Memory Cleanup
+    //Dynamic memory cleanup
     delete[] expenses;
     expenses = nullptr;
 
-    return 0;
+    return 0; //gg?
 }
 //End of main()
 
