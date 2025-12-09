@@ -1,24 +1,33 @@
-//
-// Created by moses on 12/6/2025.
-//
+// Brambila, Moses
+// 12.8.2025
+// Fall 2025 | San Diego Miramar College
+// CISC 192-3001 C/C++ Programming | (12104)
 
-#include <iostream>
-#include <string>
+//-------9.1 Final Project
+//Objective:
+//  "Apply your knowledge of programming by creating a simple, yet
+//meaningful C++ program that demonstrates all 8 major course
+//topics."
+
+
+
+//-----begining of headers--------------------
+#include <iostream>//for inputs & outputs
+#include <string>  //for strings
 #include <limits>  //for input cleanup
-#include <fstream> // for the files
+#include <fstream> //for the files
 
-// no more 'std::'
-using namespace std;
+using namespace std; //no more "std::"
+//-----end of headers-------------------------
 
+//Programmers Comments:
+//  I have begun this project with the consideration that we begin thinking from the inside and work our way out. We
+//  begin with the heart of a budget app which are the reason why we are making the app. The expenses. Our program is
+//  holding our data via structs and then the functions we build will operate on said structs.
 
-//-----I have begun this project with the consideration that we begin thinking from the approach that we start from the
-//inside and work our way out. We begin with the fundamental definition of how our program is holding the data most
-//important to our program, expenses. They will be structs and then the functions we build will operate on said structs.
-//
-//  This is where I define a struct that will hold the data for our program
-struct Expense {
-    string name;       // 'name' is the current placeholder name for the expenses(name of whatever expense)
-    double amount;     // the expense will be a double and defined as 'amount'(cost of whatever expense)
+struct Expense { //The heart of our program. A combination of strings and doubles(names and quantities).
+    string name;       //'name' is the current placeholder name for our "Expense" labels.(name of whatever expense)
+    double amount;     //the expense will be a double data type and defined as 'amount'(cost of whatever expense)
 };
 
 // This is a function prototype for resizing the dynamic array
@@ -26,49 +35,51 @@ Expense* resizeExpenses(Expense* oldArray, int oldSize, int newSize);
 
 // Again, working our way from the inside-out, we now are ready to get into the way we will mess with the data coming
 // from these structs by using functions. Since we dont know how many of these 'expenses' our users will input, we have
-// to use a dynamic memory allocation. So we use an array and ony ask the computer for the exact memory we need wile the
-// program is running.
+// to use dynamic memory allocation.
 void getExpenseDetails(Expense& exp);
 void printBudgetReport(Expense* expenses, int count, double initialBudget);
 void saveReportToFile(double initialBudget, double totalSpent, double remaining);
 
 //-------------------------------------
-//-----M A I N ___ F U N C T I O N-----
+//-----MAIN FUNCTION-------------------
 //-------------------------------------
 int main() {
-    //Simply declaring variables to be the starting point of the app
+    //in order to be a budget app, we need to have an initial budget
     double initialBudget = 0.0;
-    int capacity = 5;       //Starting size for our dynamic array
-    int expenseCount = 0;   //Keeps count of the numbers of expenses per array
+    int capacity = 5;       //Starting size for our dynamic array.
+    int expenseCount = 0;   //we begin with an expense quantity of 0. Makes sense....
 
-    // This is where we create the initial array of 5 Expense structs. 'expenses' holds the address.(It's the pointer...)
+    // This is where we create the initial array based of our 'capacity' int from earlier and expenses becomes a pointer
+    //for Expense
     Expense* expenses = new Expense[capacity];
 
     // Greet and initialize the budget
     cout << "Welcome to our budgeting app!\n";
-    cout << "Enter your total initial budget: $";
+    cout << "Please enter your total initial budget: $";
     cin >> initialBudget;
 
-    //Clearing buffer
+    //Clearing the enter key press
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    //Sentinel-Controlled while loop that runs until the user lets us know they are done
-    string userInput = "";
+    //Now that we are taking inputs from our user, we want to create door out of a loop we will use to see if their done
+    //with their inputs.
+    string userInput = "";    //where our users will place a y or n
     string doneResponse = ""; //new variable with y/n response
-    bool isDone = false; //Sentinel variable set to false
+    bool isDone = false; //a boolean for y-true and n-false
 
-    //Loop runs until isDone becomes true
+    //isDone begins as false and continues to loop until isDone becomes true in this while loop.
     while (!isDone) {
 
-        //first check, do we need to resize?
+        //first check, do we need to resize? Remember our capacity is an int with an initial value of 5. expenseCount
+        //begins at 0. Once that limit is reached, we resize by a factor of 2.
         if (expenseCount == capacity) {
             cout << "\n* Array capacity reached. Doubling size to " << capacity * 2 << "...\n";
-            expenses = resizeExpenses(expenses, expenseCount, capacity * 2);
-            capacity *= 2;
+            expenses = resizeExpenses(expenses, expenseCount, capacity * 2); //pointer updates
+            capacity *= 2; //capacity is now self-iterating
         }
 
         //Now that we've checked for the bounds of our array and grown them should they need, we can now move onto
-        //adding the Expense
+        //adding the quantity of expenses by doing arithmetic on the expenseCount variable.
         cout << "\n--- Adding Expense " << expenseCount + 1 << " ---\n";
         getExpenseDetails(expenses[expenseCount]);
         expenseCount++;
