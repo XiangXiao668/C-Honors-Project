@@ -40,10 +40,9 @@ int main() {
     double initialBudget = 0.0;
     int capacity = 5;       //Starting size for our dynamic array
     int expenseCount = 0;   //Keeps count of the numbers of expenses per array
-    string userInput == "";
 
     // This is where we create the initial array of 5 Expense structs. 'expenses' holds the address.(It's the pointer...)
-    Expenses* expenses = new Expense[capacity];
+    Expense* expenses = new Expense[capacity];
 
     // Greet and initialize the budget
     cout << "Welcome to our budgeting app!\n";
@@ -51,7 +50,7 @@ int main() {
     cin >> initialBudget;
 
     //Clearing buffer
-    cin.ignore(numeric_limits<streansize>::max(), '\n');
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     //Sentinel-Controlled while loop that runs until the user lets us know they are done
     string userInput = "";
@@ -100,3 +99,94 @@ int main() {
 //End of main()
 
 //Now that the compiler knows all of our user input data, we can move onto the other file stuff
+
+Expense* resizeExpenses(Expense* oldArray, int oldSize, int newSize) {
+    //creation of larger array
+    Expense* newArray = new Expense[newSize];
+
+    for (int i = 0; i < oldSize; ++i) {
+        newArray[i] = oldArray[i];
+    }
+
+    delete[] oldArray; //release memory from the old array
+
+    return newArray; //return the address of the new array
+}
+
+void getExpenseDetails(Expense& exp) {
+    cout << "   Enter name for expense: ";
+    getline(cin, exp.name);
+
+    double tempAmount;
+    bool isValid = false;
+
+    //do-while loop for inputs for previous functions
+    do {
+        cout << "   Enter amount for expense: $";
+        cin >> tempAmount;
+
+        //validation check
+        if (cin.fail() || tempAmount <= 0.0) {
+            cout << "   [Error] Invalid input. Amount must be a positive number.\n";
+            //clears bad state and bad input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else {
+            isValid = true;
+        }
+    } while (!isValid);
+
+    //then we assign the valid amount from the previous checks
+    exp.amount = tempAmount;
+
+    //now we clear the buffer
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+
+//this is now were we get to the functions that calculate totals and print final
+void printBudgetReport(Expense *expenses, int count, double initialBudget) {
+    double totalSpent = 0.0;
+
+    //iteration structure to sum all expenses
+    for (int i = 0; i < count; ++i) {
+        totalSpent += expenses[i].amount; //accumulate total
+    }
+
+    //remaining balance calculation
+    double remaining = initialBudget - totalSpent;
+
+    cout << "\n-------------------------\n";
+    cout << "             Financial Report\n";
+    cout << "Initial Budget: $" << initialBudget << endl;
+    cout << "Total Expenses: $" << totalSpent << endl;
+
+    //this is the over budget check
+    if (remaining < 0) {
+        cout << "\n** OVER BUDGET by: $" << remaining * -1 << " **\n";
+    } else {
+        cout << "Remaining Budget: $" << remaining << endl;
+    }
+    cout << "-------------------------\n";
+
+    saveReportToFile(initialBudget, totalSpent, remaining);
+}
+
+//Function that saves the data to a file
+void saveReportToFile(double initialBudget, double totalSpent, double remaining) {
+    ofstream outFile("budget_report.txt");
+
+    //check if the file successfully opened
+    if (outFile.is_open()) {
+        //write data to the file
+        outFile << "-----Budget Report-----\n";
+        outFile << "Initial Budget: $" << initialBudget << "\n";
+        outFile << "Total Spent: $" << totalSpent << "\n";
+        outFile << "Remaining Balance: $" << remaining << "\n";
+
+        //close the file stream
+        outFile.close();
+        cout << "\n* Report save successful! File: budget_report.txt\n";
+    } else {
+        cout << "\n* Error... Unable to open file in order to save.\n";
+    }
+}
