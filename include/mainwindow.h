@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "budgetmanager.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -21,8 +22,11 @@ private slots:
     void on_deleteWageButton_clicked();
     void on_expensesAddButton_clicked();
     void on_deleteExpenseButton_clicked();
+    void appendIncomeToSummary(double amount);
+    void refreshSummaryWagesColumn();
 
 private:
+    BudgetManager member_budget;
     Ui::MainWindow *ui;
 };
 
